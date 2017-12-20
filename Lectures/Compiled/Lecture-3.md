@@ -174,12 +174,12 @@ An easy workaround is using *lazy migration*. When the initial capacity is reach
 A queue has the following set of operations.
 |Operation|Description|
 |-|-|
-|makeEmpty()| Create an empty queue
-|isEmpty() | Return ```True``` if the queue is empty otherwise, ```False```
-|enQueue(x) | Add X to the top of the queue
-|deQueue | Remove the element at the top of the queue and return it.
-|top() | Peek the element at the front of the queue
-|size()| Return how many elements are in the queue.
+|makeEmpty()| Create an empty queue|
+|isEmpty() | Return ```True``` if the queue is empty otherwise, ```False```|
+|enQueue(x) | Add X to the top of the queue|
+|deQueue | Remove the element at the top of the queue and return it.|
+|top() | Peek the element at the front of the queue.|
+|size()| Return how many elements are in the queue.|
   
 Queue operations are bound by the following rules:
   
@@ -188,7 +188,7 @@ Queue operations are bound by the following rules:
 |```isEmpty(makeEmpty)``` |  ```True``` |
 |```isEmpty(enQueue(x))``` |```False```|
 |```deQueue(makeEmpty)```| Error|
-|```deQueue(enQueue(x))```| ```y``` if queue has more than 1 element else ```x```.
+|```deQueue(enQueue(x))```| ```y``` if queue has more than 1 element else ```x```|
 |```top(makeEmpty())```| Error |
 |```top(push(x))```| ```y``` if queue has more than 1 element else ```x```|
   
@@ -256,313 +256,108 @@ In a SLL a node contains a single pointer to the next element and is unaware of 
   
 ```Python
 class Node:
-    def __init__(self, content=None, next=None):
-        self.content, self.next = content, next
   
-    def has_next(self):
-        return bool(self.next)
-  
-    def search(self, content):
-        if self == content:
-            return content
-  
-        if bool(self.next):
-            return self.next.search(content)
-  
-        return None
-  
-    def remove_next(self):
-        if bool(self.next):
-            self.next = self.next.next
-  
-    def __delitem__(self, content):
-  
-        if self.next == content:
-            self.remove_next()
-            return
-  
-        del self.next[content]
-        return
-  
-    def __repr__(self):
-        return str(self.content)
-  
-    def __eq__(self, content):
-        return self.content == content
+    def __init__(self, element=None, next_node=None):
+        self.next_node = next_node
+        self.element = element
   
     def __bool__(self):
-        return self.content is not None
-  
-    def __reversed__(self):
-        print("trying to reverse")
-        if bool(self.next):
-            self.next.reversed()
-            print("trying to reverse")
-        print("trying to reverse")
-        yield self
-class LinkedList:
-    def __init__(self):
-        self.root = Node()
-        self.bottom = self.root
-  
-    def __len__(self):
-        func = lambda x, node: x if node.content is None else func(x + 1, node.next)
-        return func(0, self.root)
-  
-    def __repr__(self):
-        return str([x for x in self])
-  
-    def __sub__(self, other):
-        l = LinkedList()
-  
-        temp_list = []
-  
-        for x in self:
-            if x not in other:
-                temp_list.append(x)
-  
-        for x in temp_list:
-            l.append(x)
-  
-        return l
+        return self.element is not None
   
     def __eq__(self, other):
-        if len(self) != len(other):
-            return False
-        for x in range(len(self)):
-            if self[x] != other[x]:
+        return self.element == other
+  
+    # We return a pair object in order to have a referrence to the next node.
+    def remove(self, element):
+  
+        if self == element:
+            return self.next_node, True
+  
+        if self.next_node is None:
+            return self, False
+  
+        result = self.next_node.remove(element)
+        self.next_node = result[0]
+        return self, result[1]
+  
+    class LinkedList:
+  
+        def __init__(self):
+            self.root = Node()
+            self.size = 0
+            self.current = None
+            return
+  
+        def insert(self, element):
+            self.root = Node(element, self.root)
+            self.size += 1
+            return
+  
+        # The only edge check we have to do is the root element,
+        # The other 2 cases (in the middle, in the end) can be abstracted and treated as one
+        def remove(self, element):
+            if self.size == 0:
                 return False
-        return True
   
-    def __add__(self, other):
-        l = LinkedList()
+            if self.root == element:
+                self.root = self.root.next_node
+                self.size -= 1
+                return True
   
-        for x in self:
-            l.insert(content=x)
-        for x in other:
-            l.insert(content=x)
+            current = self.root
+            while current.next_node and current.next_node != element:
+                current = current.next_node
   
-        return l
+            res = current.next_node == element
+            self.size -= res
+            current.next_node = current.next_node if not res else current.next_node.next_node
   
-    def __contains__(self, item):
-        return item == self.root.search(item)
+            return res
   
-    def __iter__(self):
-        yield self.root.content
-        current = self.root.next
-        while current:
-            yield  current.content
-            current = current.next
+        # Creates an array with all the elements in O(n), Sorts them in O(nlogn)
+        # Overwrites in O(n) -> O(nlogn) runtime.
+        def sort(self, comp=None, key=None, reverse=False):
+            elements = [x for x in self]
+            current = self.root
+            for element in sorted(elements, cmp=comp, key=key, reverse=reverse):
+                current.element = element
   
-    def __getitem__(self, index):
-        current = self.root
-        for x in range(index):
-            if bool(current):
-                current = current.next
-            else:
-                return None
+            return self
   
-        return current
+        # Calls remove element from node object and it recursively removes an element
+        # Remove function returns a pair object that contains the new next node
+        # (the new root in this case) and a boolean, indicating removal or not of element.
+        def remove_recursive(self, element):
+            result = self.root.remove(element)
+            self.root = result[0]
+            removed: bool = result[1]
   
-    def __reversed__(self):
-        l = LinkedList()
-        for x in self:
-            l.insert(x)
-        return l
+            if removed:
+                self.size -= 1
   
-    def insert(self, content):
-        self.root = Node(content, self.root)
+            return removed
   
-    def append(self, content):
-        self.bottom.content = content
-        self.bottom.next = Node()
-        self.bottom = self.bottom.next
+        # toString equivalent
+        def __repr__(self):
+            return str([x for x in self])
   
-    def pop_top(self):
-        temp = self.root
-        self.root = self.root.next
-        temp.next = None
-        return temp
+        # Simple iterator function, allows us to write for x in <list>,
+        # Equivalent to forEach in Java
+        def __iter__(self):
+            current = self.root
   
-    def peek_top(self):
-        return Node(content=self.root.content)
+            while current:
+                yield current.element
+                current = current.next_node
   
-    def __delitem__(self, content):
-        if content == self.root.content:
-            self.root = self.root.next
-        else:
-            del self.root[content]
+            return iter(self)
   
-    def __bool__(self):
-        return bool(self.root)
+        # Size/Len of the list
+        def __len__(self):
+            return self.size
 ```
   
-#### Cyclical List
+File along with tests is available [here](../../Code/Datastructures/List/LinkedList.py ).
   
-  
-Cyclical lists are used when there are memory constraints. In cyclical lists, our list doesn't end in a[n-1] but instead continues to a[0]. There is very litle reason to write a cyclical list in Python as there are no static arrays and One can always use a linkedlist implementation to achieve practically the same result.
-  
-Regardless, here is a Cyclical List implementation in Python built atop of a singly LinkedList.
-  
-##### CyclicalList in Python
-  
-  
-```Python
-class Node:
-    def __init__(self, content=None, nextN=None, previous=None):
-        self.content = content
-        self.next = nextN
-        self.previous = previous
-  
-    def has_next(self):
-        return self != self.next
-  
-    def search(self, content):
-        if self == content:
-            return content
-  
-        if self.has_next():
-            return self.next.search(content)
-  
-        return None
-  
-    def remove_next(self):
-        if bool(self.next):
-            self.next = self.next.next
-            self.next.previous = self
-  
-    def __delitem__(self, content):
-  
-        if self.next == content:
-            self.remove_next()
-            return
-  
-        del self.next[content]
-        return
-  
-    def __repr__(self):
-        return str(self.content)
-  
-    def __eq__(self, content):
-        return self.content == content
-  
-    def __bool__(self):
-        return self.content is not None
-  
-    def __reversed__(self):
-        if self.has_next():
-            self.next.reversed()
-        yield self
-  
-class CyclicalList:
-  
-    def __init__(self):
-        self.root = Node()
-        self.root.next = self.root
-        self.root.previous = self.root
-        self.bottom = self.root
-  
-    def __len__(self):
-        func = lambda x, node: x if node.content is None else func(x + 1, node.next)
-        return func(0, self.root)
-  
-    def __repr__(self):
-        return str([x for x in self])
-  
-    def __sub__(self, other):
-        l = CyclicalList()
-  
-        temp_list = []
-  
-        for x in self:
-            if x not in other:
-                temp_list.append(x)
-  
-        for x in temp_list:
-            l.append(x)
-  
-        return l
-  
-    def __eq__(self, other):
-        if len(self) != len(other):
-            return False
-        for x in range(len(self)):
-            if self[x] != other[x]:
-                return False
-        return True
-  
-    def __add__(self, other):
-        l = CyclicalList()
-  
-        for x in self:
-            l.insert(content=x)
-        for x in other:
-            l.insert(content=x)
-  
-        return l
-  
-    def __contains__(self, item):
-        return item == self.root.search(item)
-  
-    def __iter__(self):
-        yield self.root.content
-        current = self.root.next
-        while current != self.root:
-            yield  current.content
-            current = current.next
-  
-    def __getitem__(self, index):
-        current = self.root
-        for x in range(index):
-            if bool(current):
-                current = current.next
-            else:
-                return None
-  
-        return current
-  
-    def __reversed__(self):
-        l = CyclicalList()
-        for x in self:
-            l.insert(x)
-        return l
-  
-    def insert(self, content):
-        if self.root.content is None:
-            self.root.content = content
-            return
-        else:
-            self.root = Node(content, nextN=self.root, previous=self.bottom)
-            self.root.previous = self.root
-            self.bottom.next = self.root
-  
-  
-    def append(self, content):
-        self.bottom.next = Node(content=content, previous=self.bottom, nextN=self.root)
-  
-        self.bottom = self.bottom.next
-        self.root.previous = self.bottom
-  
-    def __delitem__(self, content):
-        if content == self.root.content:
-            del self.bottom[content]
-            self.root = self.bottom.next
-            return
-        if content == self.bottom.content:
-            self.bottom = self.bottom.previous
-            self.bottom.remove_next()
-            return
-        else:
-            del self.root[content]
-            return
-  
-    def __next__(self):
-        self.bottom = self.root
-        self.root = self.root.next
-        return self.bottom
-  
-    def __bool__(self):
-        return bool(self.root)
-```
-File [here](../../Code/Datastructures/List/CyclicalList.py ).
+A more complex LinkedList with operator overloading and other extra functions is available [here](../../Code/Datastructures/List/ExtendedLinkedList.py ).
   
