@@ -4,13 +4,14 @@ This file contains a list of all the Datastructures that I have implemented.
 
 ## List
 
-* [LinkedList](./Code/Datastructures/List/LinkedList.py)
+* [LinkedList (Python)](./Code/Datastructures/List/LinkedList.py)
+* [Extended LinkedList (Python)](./Code/Datastructures/List/ExtendedLinkedList.py)
 * [Cyclical List (Python)](./Code/Datastructures/List/CyclicalList.py)
 
 ## Stack
 
-* [Stack](./Code/Datastructures/Stack/Stack.py)
+* [Stack(Python)](./Code/Datastructures/Stack/Stack.py)
 
 ## Queue
 
-* [Queue](./Code/Datastructures/Queue/Stack.py)
+* [Queue(Python)](./Code/Datastructures/Queue/Stack.py)

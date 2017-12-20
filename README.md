@@ -12,7 +12,7 @@ ___
 
 ## Content
 
-### Lectures
+### Lecture Notes
 
 0. [Lecture 0 - What are algorithms and their importance.](./Lectures/Compiled/Lecture-0.md)
 1. [Lecture 1 - Big-O notation](./Lectures/Compiled/Lecture-1.md)
@@ -54,6 +54,10 @@ All code will be marked \`\`\`Language ...code... \`\`\` when the lecture is rea
     }
     ```
   * All C code is Compiled with ```gcc 7.2.0``` and flags ```-Wall -pedantic``` on ```Manjaro Linux```.
+
+### Lectures
+
+Ideas and information presented in Lectures will be written and explained in the equivalent Lecture markdown file. Some Lectures are split into more parts and others are condensed such that they make sense together.
 
 ### Roadmap
 

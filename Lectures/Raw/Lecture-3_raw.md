@@ -2,17 +2,15 @@
 ___
 #Table of Contents:
 1. [Basic Datatypes](#basic-datatypes)
-2. [Examples](#examples)
-3. [Integers](#integers)
-4. [Priority Queue](#priority-queue-adt)
-5. [List](#lists)
-6. [Stack](#stack-adt)
+1. [Examples](#examples)
+1. [Integers](#integers)
+1. [Priority Queue](#priority-queue-adt)
+1. [List](#lists)
+1. [Stack](#stack-adt)
     1. [Stack in Python using lists](#stack-in-python)
-7. [LinkedLists](#linkedlists)
+1. [LinkedLists](#linkedlists)
    1. [Singly LinkedList](#singly-linkedlists)
       1. [Sindly LinkedList in Python](#singly-linkedlist-in-python)
-   2. [Cyclical List](#cyclical-list)
-      1. [Cyclical List in Python](#cyclicallist-in-python)
 
 ## Basic Datatypes
 
@@ -35,7 +33,7 @@ Integers along with these functions $/$,$*$,$+$,$-$ consist a datatype. In order
 
 The same principle is applied to floats and doubles.
 
-#### Priority Queue ADT
+#### Priority Queue
 
 A priority queue is an abstract datatype that uses a set of elements, representiing a key, ex. ```key=int```, ```key=char```, ```key=(int,int)```.
 
@@ -50,7 +48,8 @@ An ADT can be implementent using other Datatypes, for example, a priority queue 
 
 #### Lists
 
-A list is a sequence of elements.$$\Lambda = a_1,a_2,a_3,...,a_n$$
+A list is a sequence of elements.
+$${\Lambda = a_1,a_2,a_3,...,a_n}$$
 
 * Every element in the list is called a Node. 
 * Using $\Lambda[i]$ we denote the $i_{th}$ node in the list.
