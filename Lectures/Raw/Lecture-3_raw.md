@@ -182,7 +182,7 @@ File along with tests is available [here](../../Code/Datastructures/List/Python/
 
 A more complex LinkedList with operator overloading and other extra functionality is available [here](../../Code/Datastructures/List/Python/ExtendedLinkedList.py).
 
-A list can also be implemented using arrays, called ArrayList. Depending on the implementation however, an arrayList may have ${O(n)}$ insertion and removal when the initial capacity of the array is reached and all elements will have to be migrated in a new array.
+A list can also be implemented using arrays, called ArrayList. Depending on the implementation however, an arrayList may have ${O(n)}$ insertion when the initial capacity of the array is reached and all elements will have to be migrated in a new array.
 
 An easy workaround is using *lazy migration*. When the initial capacity is reached, instead of migrating all elements, we can migrate another element when a new operation is done to the list.
 
