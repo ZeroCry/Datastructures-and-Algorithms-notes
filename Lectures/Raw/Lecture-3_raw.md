@@ -34,7 +34,7 @@ ___
 
 ## Abstract Datatypes
 
-An abstract Datatype is a mathematical model that consists of 1 or more fields, a set of operations to manipulatethe fields. In abstract Datatypes, we only care about the definition of the ADT and not the underlying implementation.
+An abstract datatype is a mathematical model that consists of 1 or more fields, a set of operations to manipulate the fields. In abstract datatype, we only care about the definition of the ADT and not the underlying implementation.
 
 ## Examples of Datatypes
 
@@ -44,7 +44,7 @@ Integers along with these functions $/$,$*$,$+$,$-$ consist a datatype. In order
 
 The same principle is applied to floats and doubles.
 
-An ADT can be implementent using other Datatypes, for example, a priority queue can be implemented using Lists, Trees, etc.
+An ADT can be implement using other datatype, for example, a priority queue can be implemented using Lists, Trees, etc.
 
 ### Lists
 
@@ -66,7 +66,7 @@ The most important operations in a list, are the insertion and removal of the fi
 
 ### LinkedLists
 
-LinkedLists use dynamic memory allocation. This means that they use memory only when needed and don't reserve unecessary memory.
+LinkedLists use dynamic memory allocation. This means that they use memory only when needed and don't reserve unnecessary memory.
 
 #### Singly LinkedLists
 
@@ -182,7 +182,7 @@ File along with tests is available [here](../../Code/Datastructures/List/Python/
 
 A more complex LinkedList with operator overloading and other extra functionality is available [here](../../Code/Datastructures/List/Python/ExtendedLinkedList.py).
 
-A list can also be implemented using arrays, called ArrayList. Depending on the implementation however, an arrayList may have ${O(n)}$ insertion when the initial capacity of the array is reached and all elements will have to be migrated in a new array.
+A list can also be implemented using arrays, called ArrayList. Depending on the implementation however, an ArrayList may have ${O(n)}$ insertion when the initial capacity of the array is reached and all elements will have to be migrated in a new array.
 
 An easy workaround is using *lazy migration*. When the initial capacity is reached, instead of migrating all elements, we can migrate another element when a new operation is done to the list.
 
@@ -279,7 +279,9 @@ class stack:
 
 ```
 
-A simple stack implementation in Python using the builtin list Datastructure. Code [here](../../Code/Datastructures/Stack/Python/Stack.py).
+A simple stack implementation in Python using the built-in list datatype.
+
+Code [here](../../Code/Datastructures/Stack/Python/Stack.py).
 
 Stacks are often implemented using linked lists.
 
