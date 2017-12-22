@@ -301,7 +301,8 @@ class Node:
             return res
 
         # Creates an array with all the elements in O(n), Sorts them in O(nlogn)
-        # Overwrites in O(n) -> O(nlogn) runtime.
+        # Overwrites in O(n) time
+        # Has O(nlogn) runtime.
         def sort(self, comp=None, key=None, reverse=False):
             elements = [x for x in self]
             current = self.root
@@ -316,12 +317,11 @@ class Node:
         def remove_recursive(self, element):
             result = self.root.remove(element)
             self.root = result[0]
-            removed: bool = result[1]
 
-            if removed:
+            if result[1]:
                 self.size -= 1
 
-            return removed
+            return result[1]
 
         # toString equivalent
         def __repr__(self):
