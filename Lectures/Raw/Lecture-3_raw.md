@@ -23,7 +23,6 @@ ___
 <!-- /code_chunk_output -->
 
 
-
 ## Basic Datatypes
 
 * Integers
@@ -151,7 +150,7 @@ class stack:
 
 ```
 
-A simple stack implementation in Python using the builtin list Datastructure. Code [here](../../Code/Datastructures/Stack/Stack.py).
+A simple stack implementation in Python using the builtin list Datastructure. Code [here](../../Code/Datastructures/Stack/Python/Stack.py).
 
 A stack can also be implemented using arrays. Depending on the implementation however, a stack using arrays may have ${O(n)}$ insertion and removal when the initial capacity of the array is reached and all elements will have to be migrated in a new array.
 
@@ -229,7 +228,7 @@ class Queue:
 
 ```
 
-Code [here](../../Code/Datastructures/Queue/Queue.py).
+Code [here](../../Code/Datastructures/Queue/Python/Queue.py).
 
 ### LinkedLists
 
@@ -344,6 +343,6 @@ class Node:
             return self.size
 ```
 
-File along with tests is available [here](../../Code/Datastructures/List/LinkedList.py).
+File along with tests is available [here](../../Code/Datastructures/List/Python/LinkedList.py).
 
-A more complex LinkedList with operator overloading and other extra functions is available [here](../../Code/Datastructures/List/ExtendedLinkedList.py).
+A more complex LinkedList with operator overloading and other extra functions is available [here](../../Code/Datastructures/List/Python/ExtendedLinkedList.py).

@@ -70,7 +70,7 @@ Ideas and information presented in Lectures will be written and explained in the
 
 - [x] Rewrite Readme.md
 - [x] Move [Raw](./Lectures/Raw) and [Compiled](./Lectures/Compiled) lectures to their own folders.
-- [ ] Fix some grammar/spelling mistakes as well as some formula visibility issues in Lectures 0-3.
+- [x] Fix some grammar/spelling mistakes as well as some formula visibility issues in Lectures 0-3.
 
 __Write the following Lecture notes:__
 
